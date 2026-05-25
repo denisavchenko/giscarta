@@ -24,6 +24,7 @@
 
 import os
 from pathlib import Path
+from qgis.PyQt.QtCore import QEvent
 
 from qgis.PyQt import uic
 from qgis.PyQt import QtWidgets
@@ -131,10 +132,10 @@ class GisCartaQGISDialog(QtWidgets.QDialog, FORM_CLASS):
     
     def eventFilter(self, obj, event):
         if isinstance(obj, QLineEdit):
-            if event.type() == event.FocusIn:
+            if event.type() == 8:
                 obj.setProperty("hasFocus", True)
                 self.update_field_style(obj)
-            elif event.type() == event.FocusOut:
+            elif event.type() == 9:
                 obj.setProperty("hasFocus", False)
                 self.update_field_style(obj)
         return super().eventFilter(obj, event)

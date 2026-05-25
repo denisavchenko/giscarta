@@ -98,13 +98,13 @@ def _edit_click(self):
     self.dlg_edit_layer.text_tags.setText(",".join(user_layer["tag"]))
 
     try:
-        self.dlg_edit_layer.map_layers_cb.currentIndexChanged['QString'].disconnect(self._is_raster_lyr_edit)
+        self.dlg_edit_layer.map_layers_cb.currentIndexChanged.disconnect(self._is_raster_lyr_edit)
         self.dlg_edit_layer.checkBox_update_geom.stateChanged.disconnect(self._edit_geom)
         self.dlg_edit_layer.checkBox_update_meta.stateChanged.disconnect(self._edit_meta)
         self.dlg_edit_layer.edit_layer_button.clicked.disconnect(self._edit_layer)
     except TypeError:
         pass
-    self.dlg_edit_layer.map_layers_cb.currentIndexChanged['QString'].connect(self._is_raster_lyr_edit)
+    self.dlg_edit_layer.map_layers_cb.currentIndexChanged.connect(self._is_raster_lyr_edit)
     self.dlg_edit_layer.checkBox_update_geom.stateChanged.connect(self._edit_geom)
     self.dlg_edit_layer.checkBox_update_meta.stateChanged.connect(self._edit_meta)
     self.dlg_edit_layer.edit_layer_button.clicked.connect(self._edit_layer)

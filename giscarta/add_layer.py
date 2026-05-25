@@ -326,10 +326,10 @@ def _add_click(self):
         self.dlg_add_layer.add_layer_button.setEnabled(False)
     self.dlg_add_layer.map_layers_cb.setFilters(QgsMapLayerProxyModel.LineLayer | QgsMapLayerProxyModel.PointLayer | QgsMapLayerProxyModel.PolygonLayer | QgsMapLayerProxyModel.RasterLayer)
     try:
-        self.dlg_add_layer.map_layers_cb.currentIndexChanged['QString'].disconnect(self._is_raster_lyr)
+        self.dlg_add_layer.map_layers_cb.currentIndexChanged.disconnect(self._is_raster_lyr)
         self.dlg_add_layer.add_layer_button.clicked.disconnect(self._add_layer)
     except TypeError:
         pass
-    self.dlg_add_layer.map_layers_cb.currentIndexChanged['QString'].connect(self._is_raster_lyr)
+    self.dlg_add_layer.map_layers_cb.currentIndexChanged.connect(self._is_raster_lyr)
     self.dlg_add_layer.add_layer_button.clicked.connect(self._add_layer)
 
