@@ -291,10 +291,10 @@ def _add_layer(self):
             req_add_layers = self.api.create_layer(req_body)
             if req_add_layers["code"] == 200:
                 msg = QMessageBox()
-                msg.setIcon(QMessageBox.Information)
+                msg.setIcon(QMessageBox.Icon.Information)
                 msg.setText("Success.  Layer added")
                 msg.setWindowTitle("Status")
-                msg.setStandardButtons(QMessageBox.Ok)
+                msg.setStandardButtons(QMessageBox.StandardButton.Ok)
                 returnValue = msg.exec()
                 self.dlg_add_layer.close()
                 self._refresh_click()
@@ -302,19 +302,19 @@ def _add_layer(self):
                 self.dlg_layers.activateWindow()
         except Exception as e:
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning)
+            msg.setIcon(QMessageBox.Icon.Warning)
             msg.setText(str(e))
             msg.setWindowTitle("Upload layer error")
-            msg.setStandardButtons(QMessageBox.Ok)
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             returnValue = msg.exec()
         if data_type == "gpkg":
             self._clear_folder(self.folderCopyPath_add)
     else:
         msg = QMessageBox()
-        msg.setIcon(QMessageBox.Warning)
+        msg.setIcon(QMessageBox.Icon.Warning)
         msg.setText("Layer name is required")
         msg.setWindowTitle("Status")
-        msg.setStandardButtons(QMessageBox.Ok)
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         returnValue = msg.exec()
 
 # add layer button

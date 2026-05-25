@@ -28,14 +28,14 @@ from pathlib import Path
 from qgis.PyQt import uic
 from qgis.PyQt import QtWidgets
 from qgis.PyQt import QtCore
-from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtWidgets import QLineEdit
+from qgis.PyQt.QtGui import QPixmap, QIcon
+from qgis.PyQt.QtWidgets import QLineEdit
 from qgis.PyQt.QtWidgets import QLabel
 
-from PyQt5.QtSvg import QSvgRenderer
-from PyQt5.QtGui import QPainter
+from qgis.PyQt.QtSvg import QSvgRenderer
+from qgis.PyQt.QtGui import QPainter
 
-from PyQt5.QtCore import QRectF
+from qgis.PyQt.QtCore import QRectF
 
 from ..constants import (
     AUTH_STYLE_MAC, AUTH_STYLE_WIN
@@ -91,7 +91,7 @@ class GisCartaQGISDialog(QtWidgets.QDialog, FORM_CLASS):
         super().paintEvent(event)
         try:
             painter = QPainter(self)
-            painter.setRenderHint(QPainter.Antialiasing, True)
+            painter.setRenderHint(QPainter.RenderHint.Antialiasing)
             if self.svg_renderer.isValid():
                 rect_f = QRectF(self.rect())
                 self.svg_renderer.render(painter, rect_f)

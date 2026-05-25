@@ -21,19 +21,19 @@ def _ai_layer(self):
             tarif = response.json()['billing_plan']
         else:
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning) 
+            msg.setIcon(QMessageBox.Icon.Warning) 
             msg.setText('Geodata AI is available only for Pro subscription plan users. Please change the subscription plan <a href="https://map.giscarta.com/tariffs">https://map.giscarta.com/tariffs</a>')
             msg.setWindowTitle("Plan restriction")
-            msg.setStandardButtons(QMessageBox.Ok)
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             returnValue = msg.exec()
             return
         
         if tarif != 'Pro':
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning) 
+            msg.setIcon(QMessageBox.Icon.Warning) 
             msg.setText('Geodata AI is available only for Pro subscription plan users. Please change the subscription plan <a href="https://map.giscarta.com/tariffs">https://map.giscarta.com/tariffs</a>')
             msg.setWindowTitle("Tariff restriction")
-            msg.setStandardButtons(QMessageBox.Ok)
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             returnValue = msg.exec()
             return
         
@@ -84,10 +84,10 @@ def _ai_layer(self):
                 lyr.dataProvider().addFeatures(features)
                 QgsProject.instance().addMapLayer(lyr)
                 msg = QMessageBox()
-                msg.setIcon(QMessageBox.Information)
+                msg.setIcon(QMessageBox.Icon.Information)
                 msg.setText("Layer was loaded successfully")
                 msg.setWindowTitle("Status")
-                msg.setStandardButtons(QMessageBox.Ok)
+                msg.setStandardButtons(QMessageBox.StandardButton.Ok)
                 returnValue = msg.exec()
                 
                 self.dlg_ai.request.clear()
@@ -97,26 +97,26 @@ def _ai_layer(self):
                 
         except IndexError:
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning)
+            msg.setIcon(QMessageBox.Icon.Warning)
             msg.setText("Failed to complete the request")
             msg.setWindowTitle("Error")
-            msg.setStandardButtons(QMessageBox.Ok)
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             returnValue = msg.exec()
             
         except ValueError:
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning)
+            msg.setIcon(QMessageBox.Icon.Warning)
             msg.setText("Failed to complete the request")
             msg.setWindowTitle("Error")
-            msg.setStandardButtons(QMessageBox.Ok)
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             returnValue = msg.exec()
 
     else:
         msg = QMessageBox()
-        msg.setIcon(QMessageBox.Warning)
+        msg.setIcon(QMessageBox.Icon.Warning)
         msg.setText("Fill in the request field")
         msg.setWindowTitle("Error")
-        msg.setStandardButtons(QMessageBox.Ok)
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         returnValue = msg.exec()
 
 def _ai_inf(self):

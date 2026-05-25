@@ -118,10 +118,10 @@ def _log_in(self):
 
     except Exception as e:
         msg = QMessageBox()
-        msg.setIcon(QMessageBox.Warning)
+        msg.setIcon(QMessageBox.Icon.Warning)
         msg.setText(str(e))
         msg.setWindowTitle("Authorisation error")
-        msg.setStandardButtons(QMessageBox.Ok)
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         returnValue = msg.exec()
 
 

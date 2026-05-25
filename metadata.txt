@@ -5,6 +5,7 @@
 [general]
 name=GISCARTA
 qgisMinimumVersion=3.16
+qgisMaximumVersion=4.99
 description=Manage your GISCARTA data
 version=1.4
 author=GISCARTA

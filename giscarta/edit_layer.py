@@ -31,10 +31,10 @@ def _edit_layer(self):
             req_body["description"] = layer_description
         else:
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning)
+            msg.setIcon(QMessageBox.Icon.Warning)
             msg.setText("Layer name is required")
             msg.setWindowTitle("Status")
-            msg.setStandardButtons(QMessageBox.Ok)
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             returnValue = msg.exec()
 
     if self.dlg_edit_layer.checkBox_update_geom.isChecked():
@@ -57,10 +57,10 @@ def _edit_layer(self):
                              'application/octet-stream')
         else:
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning)
+            msg.setIcon(QMessageBox.Icon.Warning)
             msg.setText("Layer is required for updating geometry")
             msg.setWindowTitle("Update layer error")
-            msg.setStandardButtons(QMessageBox.Ok)
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             returnValue = msg.exec()
 
     # try to update layer
@@ -68,10 +68,10 @@ def _edit_layer(self):
         req_edit_layers = self.api.patch(url_edit_layer, data=req_body)
         if req_edit_layers["id"]:
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Information)
+            msg.setIcon(QMessageBox.Icon.Information)
             msg.setText("Success.  Layer updated")
             msg.setWindowTitle("Status")
-            msg.setStandardButtons(QMessageBox.Ok)
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             returnValue = msg.exec()
             self.dlg_edit_layer.close()
             self._refresh_click()
@@ -79,10 +79,10 @@ def _edit_layer(self):
             self.dlg_layers.activateWindow()
     except Exception as e:
         msg = QMessageBox()
-        msg.setIcon(QMessageBox.Warning)
+        msg.setIcon(QMessageBox.Icon.Warning)
         msg.setText(str(e))
         msg.setWindowTitle("Update layer error")
-        msg.setStandardButtons(QMessageBox.Ok)
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         returnValue = msg.exec()
     if data_type == "gpkg":
         self._clear_folder(self.folderCopyPath_add)

@@ -27,7 +27,7 @@ from pathlib import Path
 
 from qgis.PyQt import uic
 from qgis.PyQt import QtWidgets
-from PyQt5.QtGui import QPixmap, QIcon
+from qgis.PyQt.QtGui import QPixmap, QIcon
 from sys import platform
 
 

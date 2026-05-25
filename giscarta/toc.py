@@ -12,11 +12,11 @@ def _create_table(self):
         table.setRowCount(len(self.user_layers))
         table.setHorizontalHeaderLabels(["Name", "Description", "Tags", "Count", "Type"])
         header = table.horizontalHeader()
-        header.setSectionResizeMode(0, QHeaderView.Stretch)
-        header.setSectionResizeMode(1, QHeaderView.Stretch)
-        header.setSectionResizeMode(2, QHeaderView.Stretch)
-        header.setSectionResizeMode(3, QHeaderView.Stretch)
-        header.setSectionResizeMode(4, QHeaderView.ResizeToContents)
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
 
         self.user_layers = sorted(self.user_layers, key=lambda d: d['title'].lower())
         for l in range(len(self.user_layers)):
@@ -25,7 +25,7 @@ def _create_table(self):
             lyr_tags = ", ".join(ul["tag"])
             lyr_gt = ul["geometryType"].split(".")[-1]
             lyr_fc = QTableWidgetItem(str(ul["feature_count"]))
-            lyr_fc.setTextAlignment(Qt.AlignVCenter | Qt.AlignRight)
+            lyr_fc.setTextAlignment(Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignRight)
             table.setItem(l, 0, QTableWidgetItem(ul["title"]))
             table.setItem(l, 1, QTableWidgetItem(ul["description"]))
             table.setItem(l, 2, QTableWidgetItem(lyr_tags))
@@ -33,14 +33,14 @@ def _create_table(self):
             table.setItem(l, 4, QTableWidgetItem(lyr_gt))
         table.setAlternatingRowColors(True)
         table.setWordWrap(True)
-        table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
 
     except Exception as e:
         msg = QMessageBox()
-        msg.setIcon(QMessageBox.Warning)
+        msg.setIcon(QMessageBox.Icon.Warning)
         msg.setText(str(e))
         msg.setWindowTitle("Get layers error")
-        msg.setStandardButtons(QMessageBox.Ok)
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         returnValue = msg.exec()
 
 # select row action

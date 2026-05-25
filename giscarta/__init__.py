@@ -336,7 +336,7 @@ class GisCartaQGIS:
             self.dlg.log_in_button.clicked.connect(self._log_in)
 
             # Run the dialog event loop
-            result = self.dlg.exec_()
+            result = self.dlg.exec() if hasattr(self.dlg, 'exec') else self.dlg.exec_()
 
             # disconnect events when closing a window
             if result == 0:

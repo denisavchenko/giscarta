@@ -50,7 +50,7 @@ def _export_layer(self):
                 if isinstance(value, float):
                     return QVariant.Double
                 if isinstance(value, str):
-                    dt = QtCore.QDateTime.fromString(value, QtCore.Qt.ISODate)
+                    dt = QtCore.QDateTime.fromString(value, QtCore.Qt.DateFormat.ISODate)
                     if dt.isValid():
                         return QVariant.DateTime
                     if value.lower() in ('true', 'false', 'yes', 'no', '1', '0'):
@@ -185,7 +185,7 @@ def _export_layer(self):
                             else:
                                 attr_values.append(bool(value))
                         elif field.type() == QVariant.DateTime:
-                            dt = QtCore.QDateTime.fromString(value, QtCore.Qt.ISODate)
+                            dt = QtCore.QDateTime.fromString(value, QtCore.Qt.DateFormat.ISODate)
                             if dt.isValid():
                                 attr_values.append(dt)
                             else:
@@ -205,13 +205,13 @@ def _export_layer(self):
                 QgsProject.instance().addMapLayer(lyr)
 
                 msg = QMessageBox()
-                msg.setIcon(QMessageBox.Information)
+                msg.setIcon(QMessageBox.Icon.Information)
                 msg.setText(f"Layer loaded successfully: {valid_count} features")
                 msg.setWindowTitle("Status")
                 msg.exec()
             else:
                 msg = QMessageBox()
-                msg.setIcon(QMessageBox.Warning)
+                msg.setIcon(QMessageBox.Icon.Warning)
                 msg.setText("No valid features found in the layer")
                 msg.setWindowTitle("Error")
                 msg.exec()
@@ -219,7 +219,7 @@ def _export_layer(self):
         else:
             print("error", response.status_code, response.text)
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning)
+            msg.setIcon(QMessageBox.Icon.Warning)
             msg.setText(response.text)
             msg.setWindowTitle("Layer loading error")
             msg.exec()
@@ -266,10 +266,10 @@ def _export_layer(self):
                             QgsProject.instance().addMapLayer(raster_layer)
                             
                             msg = QMessageBox()
-                            msg.setIcon(QMessageBox.Information)
+                            msg.setIcon(QMessageBox.Icon.Information)
                             msg.setText("Layer was loaded successfully")
                             msg.setWindowTitle("Status")
-                            msg.setStandardButtons(QMessageBox.Ok)
+                            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
                             returnValue = msg.exec()
                         else:
                             raise Exception("Invalid raster layer file")
@@ -281,27 +281,27 @@ def _export_layer(self):
             except Exception as e:
                 print(f"Raster download error: {str(e)}")
                 msg = QMessageBox()
-                msg.setIcon(QMessageBox.Warning)
+                msg.setIcon(QMessageBox.Icon.Warning)
                 msg.setText(f"Raster layer loading error: {str(e)}")
                 msg.setWindowTitle("Error")
-                msg.setStandardButtons(QMessageBox.Ok)
+                msg.setStandardButtons(QMessageBox.StandardButton.Ok)
                 returnValue = msg.exec()
         except Exception as e:
             print(f"Raster download error: {str(e)}")
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Warning)
+            msg.setIcon(QMessageBox.Icon.Warning)
             msg.setText(f"Raster layer loading error: {str(e)}")
             msg.setWindowTitle("Error")
-            msg.setStandardButtons(QMessageBox.Ok)
+            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
             returnValue = msg.exec()
 
 
 def _export_click(self):
     msg = QMessageBox()
-    msg.setIcon(QMessageBox.Question)
+    msg.setIcon(QMessageBox.Icon.Question)
     msg.setText("Are you sure you want to download a layer from GISCARTA?")
     msg.setWindowTitle("Saving a layer")
-    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    msg.setStandardButtons(QMessageBox.StandardButton.Ok | QMessageBox.StandardButton.Cancel)
     returnValue = msg.exec()
-    if returnValue == QMessageBox.Ok:
+    if returnValue == QMessageBox.StandardButton.Ok:
         _export_layer(self)
