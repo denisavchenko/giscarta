@@ -81,6 +81,7 @@ QLabel#footer_label span {
 AUTH_STYLE_WIN = """
 QDialog {
     background: transparent;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 QLineEdit {
@@ -89,11 +90,13 @@ QLineEdit {
     color: white;
     padding: 0px 8px;
     font-size: 7pt;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 QLabel {
     color: white;
     font-size: 7pt;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 QPushButton#sign_up_button {
@@ -103,6 +106,7 @@ QPushButton#sign_up_button {
     color: white;
     font-weight: bold;
     font-size: 7pt;
+    font-family: "Segoe UI", Arial, sans-serif;
     padding: 4px 10px;
 }
 
@@ -113,12 +117,14 @@ QPushButton#log_in_button {
     color: white;
     font-weight: bold;
     font-size: 7pt;
+    font-family: "Segoe UI", Arial, sans-serif;
     padding: 4px 10px;
 }
 
 QLabel#footer_label {
     color: rgb(154, 164, 174);
     font-size: 6pt;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 QLabel#footer_label a {

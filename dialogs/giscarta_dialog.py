@@ -90,30 +90,35 @@ class GisCartaQGISDialog(QtWidgets.QDialog, FORM_CLASS):
         
     def paintEvent(self, event):
         super().paintEvent(event)
+        painter = None
         try:
             painter = QPainter(self)
             painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+            target_rect = QRectF(self.rect())
+
             if self.svg_renderer.isValid():
-                rect_f = QRectF(self.rect())
-                self.svg_renderer.render(painter, rect_f)
-                
+                self.svg_renderer.render(painter, target_rect)
+
+            # PNG layer: glass panel, arrow gradients and white stars.
             if os.path.exists(self.png_path):
                 png_pixmap = QPixmap(self.png_path)
                 if not png_pixmap.isNull():
                     scaled_pixmap = png_pixmap.scaled(
-                        541,
-                        282,
-                        QtCore.Qt.KeepAspectRatioByExpanding,
-                        QtCore.Qt.SmoothTransformation
+                        self.BANNER_WIDTH_PIXELS,
+                        self.BANNER_HEIGHT_PIXELS,
+                        QtCore.Qt.AspectRatioMode.KeepAspectRatioByExpanding,
+                        QtCore.Qt.TransformationMode.SmoothTransformation,
                     )
-                    painter.drawPixmap(0, 0, scaled_pixmap)                 
-            if self.svg_renderer.isValid():
-                rect_f2 = QRectF(self.rect())
-                self.svg_renderer2.render(painter, rect_f2)
+                    painter.drawPixmap(0, 0, scaled_pixmap)
+
+            # SVG layer: logo and GISCARTA text on top.
+            if self.svg_renderer2.isValid():
+                self.svg_renderer2.render(painter, target_rect)
         except Exception as e:
             print(f"Ошибка при отрисовке SVG: {e}")
         finally:
-            painter.end()
+            if painter is not None and painter.isActive():
+                painter.end()
     
     def setup_dynamic_borders(self):
         fields = [self.domain, self.username, self.password]
@@ -132,10 +137,10 @@ class GisCartaQGISDialog(QtWidgets.QDialog, FORM_CLASS):
     
     def eventFilter(self, obj, event):
         if isinstance(obj, QLineEdit):
-            if event.type() == 8:
+            if event.type() == QEvent.Type.FocusIn:
                 obj.setProperty("hasFocus", True)
                 self.update_field_style(obj)
-            elif event.type() == 9:
+            elif event.type() == QEvent.Type.FocusOut:
                 obj.setProperty("hasFocus", False)
                 self.update_field_style(obj)
         return super().eventFilter(obj, event)
